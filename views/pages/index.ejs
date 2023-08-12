@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body>
+
+    <section class="flexer">
+
+        <% if(locals.user != null) { %>
+            <script>
+                // Redirect the authenticated user to the dashboard
+                window.location.href = '/users/dashboard'; 
+            </script>
+        <% } else { %>
+        <div class="container-log">
+            <img src="/assets/imgs/welcome.png" alt="Logo" class="wel">
+
+            
+            <h3>Welcome to MirrorsMeet</h3>
+            <form action="/users/login" method="POST">
+                <% if (typeof message !== 'undefined') { %>
+                    <p class="error-message"><%= message %></p>
+                <% } %>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Login</button>
+                <div>
+    
+                    <a href="/users/register/" class="linker"> register</a>
+                </div>
+            </form>
+        </div>
+        <% } %>
+    </section>
+    <%- include('../partials/footer'); %> 
+</body>
+
+</html>

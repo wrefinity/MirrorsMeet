@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body>
+    <%- include('../partials/headers') %>
+
+        <div class="container">
+            <h2>Meetings</h2>
+            <form action="/meets/" method="POST">
+                <% if (typeof message !=='undefined' ) { %>
+                    <p class="error-message">
+                        <%= message %>
+                    </p>
+                    <% } %>
+                        <button type="submit">create</button>
+
+            </form>
+            <table class="responsive-table">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Email</th>
+                        <th>Meeting Code</th>
+                        <th>Passcode</th>
+                        <th>Start</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <% if (meetings !=='' ) { %>
+                        <% meetings.forEach(meeting=> { %>
+                            <tr>
+                                <td>
+                                    <%= meeting.userId.username %>
+                                </td>
+                                <td>
+                                    <%= meeting.userId.email %>
+                                </td>
+                                <td>
+                                    <%= meeting.meetingCode %>
+                                </td>
+                                <td>
+                                    <%= meeting.passcode %>
+                                </td>
+                                <td>
+                                    <a href="/meets/starring/<%= meeting.meetingCode %>">
+                                        <button class="start-btn">Start</button>
+                                    </a>
+                                </td>
+
+                            </tr>
+                            <% }); %>
+
+                                <% } %>
+
+                </tbody>
+            </table>
+        </div>
+
+        <%- include('../partials/footer'); %>
+</body>
+
+</html>
